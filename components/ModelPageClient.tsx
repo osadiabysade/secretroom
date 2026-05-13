@@ -6,6 +6,8 @@ import ScratchRevealCarousel from './ScratchRevealCarousel';
 
 type Palette = 'gothic' | 'dusk';
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 const MODEL = {
   name: 'Amber Prada',
   alias: 'Amber',
@@ -13,17 +15,8 @@ const MODEL = {
   bio: 'Hay partes de mí que las palabras no alcanzan a describir. Mi contenido no es para todos — es para los que saben apreciar lo que va más allá de lo evidente.',
   platform: 'Clips4Sale',
   platformUrl: '#',
-  photos: [
-    '/photos/foto01.jpg',
-    '/photos/foto02.jpg',
-    '/photos/foto03.jpg',
-    '/photos/foto04.jpg',
-    '/photos/foto05.jpg',
-    '/photos/foto06.jpg',
-    '/photos/foto07.jpg',
-    '/photos/foto08.jpg',
-  ],
-  heroVideo: '/video/presentacion_AmberPrada.mp4',
+  photos: Array.from({ length: 8 }, (_, i) => `${BASE}/photos/foto0${i + 1}.jpg`),
+  heroVideo: `${BASE}/video/presentacion_AmberPrada.mp4`,
   stats: [
     { label: 'Suscriptores', value: '1.2K+' },
     { label: 'Contenidos exclusivos', value: '200+' },
@@ -44,8 +37,6 @@ export default function ModelPageClient() {
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
-
-  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
   return (
     <div
@@ -174,7 +165,7 @@ export default function ModelPageClient() {
             className="absolute inset-0 w-full h-full object-cover"
             poster={MODEL.photos[0]}
           >
-            <source src={`${base}${MODEL.heroVideo}`} type="video/mp4" />
+            <source src={MODEL.heroVideo} type="video/mp4" />
           </video>
           <div className="absolute inset-0" style={{
             background: 'linear-gradient(to top, var(--model-bg) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.15) 100%)'
@@ -434,7 +425,7 @@ export default function ModelPageClient() {
           <div className="flex flex-col sm:flex-row items-center gap-8">
             <div className="relative h-10 w-36">
               <Image
-                src="/logos/osadia.jpg"
+                src={`${BASE}/logos/osadia.jpg`}
                 alt="Osadía by Sade"
                 fill
                 className="object-contain filter brightness-0 invert opacity-60 hover:opacity-90 transition-opacity duration-300"
@@ -443,7 +434,7 @@ export default function ModelPageClient() {
             <div className="w-px h-7 hidden sm:block" style={{ background: 'var(--model-border)' }} />
             <div className="relative h-10 w-24">
               <Image
-                src="/logos/rawstone.jpg"
+                src={`${BASE}/logos/rawstone.jpg`}
                 alt="Raw Stone Producciones"
                 fill
                 className="object-contain filter brightness-0 invert opacity-60 hover:opacity-90 transition-opacity duration-300"
