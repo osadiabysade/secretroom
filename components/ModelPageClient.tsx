@@ -13,9 +13,9 @@ const MODEL = {
   alias: 'Amber',
   tagline: 'Lo que ves es solo el principio.',
   bio: 'Hay partes de mí que las palabras no alcanzan a describir. Mi contenido no es para todos — es para los que saben apreciar lo que va más allá de lo evidente.',
-  platform: 'Clips4Sale',
-  platformUrl: '#',
-  photos: Array.from({ length: 8 }, (_, i) => `${BASE}/photos/foto0${i + 1}.jpg`),
+  platformUrl: 'https://www.sheer.com/amber',
+  platformUrl2: 'https://www.xvideos.com/channels/amber6096',
+  photos: Array.from({ length: 9 }, (_, i) => `${BASE}/photos/foto0${i + 1}.jpg`),
   heroVideo: `${BASE}/video/presentacion_AmberPrada.mp4`,
   stats: [
     { label: 'Suscriptores', value: '1.2K+' },
@@ -105,35 +105,22 @@ export default function ModelPageClient() {
                 >
                   ×
                 </button>
-
-                {/* Card photo */}
                 <div className="relative w-full aspect-[3/4] rounded-sm overflow-hidden mb-5"
                   style={{ border: '1px solid var(--model-border)' }}>
-                  <Image
-                    src={MODEL.photos[1]}
-                    alt={MODEL.name}
-                    fill
-                    className="object-cover object-top"
-                  />
+                  <Image src={MODEL.photos[1]} alt={MODEL.name} fill className="object-cover object-top" />
                   <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--model-bg2) 0%, transparent 40%)' }} />
                 </div>
-
                 <p className="font-body text-[9px] tracking-[0.4em] uppercase mb-2" style={{ color: 'var(--model-accent)' }}>
                   ✦ &nbsp; Sobre mí
                 </p>
-                <h3 className="font-display text-2xl mb-4" style={{ color: 'var(--model-text)' }}>
-                  {MODEL.alias}
-                </h3>
-                <p className="font-heading italic text-base leading-relaxed mb-6"
-                  style={{ color: 'var(--model-muted)', fontWeight: 300 }}>
+                <h3 className="font-display text-2xl mb-4" style={{ color: 'var(--model-text)' }}>{MODEL.alias}</h3>
+                <p className="font-heading italic text-base leading-relaxed mb-6" style={{ color: 'var(--model-muted)', fontWeight: 300 }}>
                   {MODEL.bio}
                 </p>
                 <div className="section-divider mb-6" />
                 <p className="font-body text-xs leading-relaxed mb-6" style={{ color: 'var(--model-muted)', fontWeight: 300 }}>
                   Mi contenido es íntimo, auténtico y hecho con intención. No encontrarás nada igual en ningún otro lugar.
                 </p>
-
-                {/* Stats */}
                 <div className="grid grid-cols-3 gap-3 mb-6">
                   {MODEL.stats.map((s, i) => (
                     <div key={i} className="text-center p-3 rounded-sm" style={{ background: 'var(--model-bg)', border: '1px solid var(--model-border)' }}>
@@ -142,13 +129,8 @@ export default function ModelPageClient() {
                     </div>
                   ))}
                 </div>
-
-                <a
-                  href={MODEL.platformUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-model block w-full text-center px-6 py-3 text-[11px] tracking-[0.2em] font-body font-semibold rounded-sm"
-                >
+                <a href={MODEL.platformUrl} target="_blank" rel="noopener noreferrer"
+                  className="btn-model block w-full text-center px-6 py-3 text-[11px] tracking-[0.2em] font-body font-semibold rounded-sm">
                   <span>VER MI CONTENIDO</span>
                 </a>
               </div>
@@ -158,7 +140,7 @@ export default function ModelPageClient() {
       </AnimatePresence>
 
       {/* ══════════════ HERO ══════════════ */}
-      <section ref={heroRef} className="relative h-screen min-h-[600px] overflow-hidden flex items-end">
+      <section ref={heroRef} className="relative h-screen min-h-[600px] overflow-hidden flex items-end justify-end">
         <motion.div className="absolute inset-0" style={{ y: heroY }}>
           <video
             autoPlay muted loop playsInline
@@ -168,17 +150,18 @@ export default function ModelPageClient() {
             <source src={MODEL.heroVideo} type="video/mp4" />
           </video>
           <div className="absolute inset-0" style={{
-            background: 'linear-gradient(to top, var(--model-bg) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.15) 100%)'
+            background: 'linear-gradient(to top, var(--model-bg) 0%, rgba(0,0,0,0.35) 40%, transparent 100%)'
           }} />
         </motion.div>
 
+        {/* Content — right aligned */}
         <motion.div
-          className="relative z-10 w-full px-6 md:px-14 pb-16 md:pb-24"
+          className="relative z-10 w-full px-6 md:px-14 pb-16 md:pb-24 flex justify-end"
           style={{ opacity: heroOpacity }}
         >
-          <div className="max-w-2xl">
+          <div className="max-w-xl text-right">
             <motion.p
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
               className="font-body text-[10px] tracking-[0.5em] uppercase mb-4"
@@ -203,8 +186,8 @@ export default function ModelPageClient() {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ delay: 0.9, duration: 0.8 }}
-              className="h-px mb-6 origin-left"
-              style={{ background: 'linear-gradient(90deg, var(--model-accent), transparent)' }}
+              className="h-px mb-6 origin-right ml-auto"
+              style={{ background: 'linear-gradient(270deg, var(--model-accent), transparent)' }}
             />
             <motion.p
               initial={{ opacity: 0 }}
@@ -215,17 +198,21 @@ export default function ModelPageClient() {
             >
               {MODEL.tagline}
             </motion.p>
-            <motion.a
-              href={MODEL.platformUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.3 }}
-              className="btn-model inline-block px-10 py-4 text-sm tracking-[0.25em] font-body font-semibold rounded-sm heartbeat"
+              className="flex justify-end"
             >
-              <span>ENTRAR AL CONTENIDO EXCLUSIVO</span>
-            </motion.a>
+              <a
+                href={MODEL.platformUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-model inline-block px-10 py-4 text-sm tracking-[0.25em] font-body font-semibold rounded-sm heartbeat"
+              >
+                <span>ENTRAR AL CONTENIDO EXCLUSIVO</span>
+              </a>
+            </motion.div>
           </div>
         </motion.div>
 
@@ -243,10 +230,7 @@ export default function ModelPageClient() {
       </section>
 
       {/* ══════════════ SCRATCH REVEAL ══════════════ */}
-      <section
-        className="relative py-20 px-6 md:px-12 overflow-hidden"
-        style={{ background: 'var(--model-bg)' }}
-      >
+      <section className="relative py-20 px-6 md:px-12 overflow-hidden" style={{ background: 'var(--model-bg)' }}>
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, var(--model-soft) 0%, transparent 70%)' }} />
         <div className="max-w-2xl mx-auto relative z-10">
           <motion.div
@@ -265,7 +249,6 @@ export default function ModelPageClient() {
               Toca o desliza para descubrir. Lo que reveles, es tuyo.
             </p>
           </motion.div>
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -296,7 +279,6 @@ export default function ModelPageClient() {
               CONTENIDO EXCLUSIVO
             </h2>
           </motion.div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {MODEL.contentTypes.map((ct, i) => (
               <motion.div
@@ -310,18 +292,11 @@ export default function ModelPageClient() {
                 style={{ border: '1px solid var(--model-border)' }}
               >
                 <div className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: 'radial-gradient(ellipse at center, var(--model-soft), transparent)' }}
-                />
+                  style={{ background: 'radial-gradient(ellipse at center, var(--model-soft), transparent)' }} />
                 <div className="relative z-10">
-                  <div className="text-4xl mb-4 filter grayscale group-hover:grayscale-0 transition-all duration-500">
-                    {ct.icon}
-                  </div>
-                  <h3 className="font-heading text-lg mb-2" style={{ color: 'var(--model-text)', fontWeight: 500 }}>
-                    {ct.title}
-                  </h3>
-                  <p className="font-body text-xs leading-relaxed" style={{ color: 'var(--model-muted)', fontWeight: 300 }}>
-                    {ct.desc}
-                  </p>
+                  <div className="text-4xl mb-4 filter grayscale group-hover:grayscale-0 transition-all duration-500">{ct.icon}</div>
+                  <h3 className="font-heading text-lg mb-2" style={{ color: 'var(--model-text)', fontWeight: 500 }}>{ct.title}</h3>
+                  <p className="font-body text-xs leading-relaxed" style={{ color: 'var(--model-muted)', fontWeight: 300 }}>{ct.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -341,23 +316,14 @@ export default function ModelPageClient() {
             style={{ border: '1px solid var(--model-border)', background: 'var(--model-bg2)' }}
           >
             <p className="text-5xl mb-6" style={{ filter: 'grayscale(0.3)' }}>🔥</p>
-            <p className="font-heading italic text-xl md:text-2xl mb-6 leading-relaxed"
-              style={{ color: 'var(--model-text)', fontWeight: 300 }}>
+            <p className="font-heading italic text-xl md:text-2xl mb-6 leading-relaxed" style={{ color: 'var(--model-text)', fontWeight: 300 }}>
               &ldquo;Llevaba tiempo buscando contenido real, sin filtros ni poses. Amber es diferente — auténtica, provocadora y siempre sorprende.&rdquo;
             </p>
-            <p className="font-body text-xs tracking-widest uppercase" style={{ color: 'var(--model-muted)' }}>
-              — Suscriptor verificado
-            </p>
+            <p className="font-body text-xs tracking-widest uppercase" style={{ color: 'var(--model-muted)' }}>— Suscriptor verificado</p>
             <div className="h-px my-8" style={{ background: 'linear-gradient(90deg, transparent, var(--model-accent), transparent)' }} />
             <div className="flex justify-center gap-10">
               {MODEL.stats.map((s, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.12 }}
-                >
+                <motion.div key={i} initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12 }}>
                   <p className="font-display text-3xl md:text-4xl" style={{ color: 'var(--model-accent2)' }}>{s.value}</p>
                   <p className="font-body text-[9px] tracking-widest uppercase mt-1" style={{ color: 'var(--model-muted)' }}>{s.label}</p>
                 </motion.div>
@@ -368,59 +334,86 @@ export default function ModelPageClient() {
       </section>
 
       {/* ══════════════ FINAL CTA ══════════════ */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={MODEL.photos[3]}
-            alt={MODEL.name}
-            fill
-            className="object-cover object-top"
-          />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.7) 55%, rgba(0,0,0,0.35) 100%)' }} />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--model-bg) 0%, transparent 30%)' }} />
-        </div>
+      <section className="relative overflow-hidden" style={{ background: 'var(--model-bg)' }}>
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 20% 50%, var(--model-soft) 0%, transparent 55%)' }} />
 
-        <div className="relative z-10 w-full px-6 md:px-16 py-20">
-          <motion.div
-            className="max-w-xl"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <p className="font-body text-[10px] tracking-[0.5em] uppercase mb-6" style={{ color: 'var(--model-accent)' }}>
-              ✦ &nbsp; No te quedes con las ganas
-            </p>
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-tight mb-6" style={{ color: 'var(--model-text)' }}>
-              LO MEJOR<br />
-              <span style={{ color: 'var(--model-accent)' }}>ESTÁ ADENTRO</span>
-            </h2>
-            <p className="font-heading italic text-lg mb-10 leading-relaxed"
-              style={{ color: 'var(--model-muted)', fontWeight: 300 }}>
-              {MODEL.stats[0].value} personas ya tienen acceso a lo que tú todavía no has visto.
-            </p>
-            <motion.a
-              href={MODEL.platformUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-model inline-block px-12 py-5 text-base tracking-[0.25em] font-body font-bold rounded-sm"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
+        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 py-20 md:py-28">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+
+            {/* Left: copy + CTAs */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
-              <span>ACCEDER AHORA →</span>
-            </motion.a>
-            <p className="font-body text-[10px] mt-4 tracking-wider" style={{ color: 'var(--model-muted)', opacity: 0.5 }}>
-              Acceso inmediato · Contenido nuevo cada semana
-            </p>
-          </motion.div>
+              <p className="font-body text-[10px] tracking-[0.5em] uppercase mb-6" style={{ color: 'var(--model-accent)' }}>
+                ✦ &nbsp; No te quedes con las ganas
+              </p>
+              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl leading-tight mb-6" style={{ color: 'var(--model-text)' }}>
+                LO MEJOR<br />
+                <span style={{ color: 'var(--model-accent)' }}>ESTÁ ADENTRO</span>
+              </h2>
+              <p className="font-heading italic text-lg mb-10 leading-relaxed" style={{ color: 'var(--model-muted)', fontWeight: 300 }}>
+                {MODEL.stats[0].value} personas ya tienen acceso a lo que tú todavía no has visto.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3 mb-4">
+                <motion.a
+                  href={MODEL.platformUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-model px-8 py-4 text-sm tracking-[0.2em] font-body font-bold rounded-sm text-center"
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <span>SHEER.COM →</span>
+                </motion.a>
+                <motion.a
+                  href={MODEL.platformUrl2}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 text-sm tracking-[0.2em] font-body font-semibold rounded-sm text-center border transition-all duration-300"
+                  style={{ borderColor: 'var(--model-border)', color: 'var(--model-muted)' }}
+                  whileHover={{ scale: 1.04, borderColor: 'var(--model-accent2)', color: 'var(--model-text)' }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  XVIDEOS →
+                </motion.a>
+              </div>
+              <p className="font-body text-[10px] tracking-wider" style={{ color: 'var(--model-muted)', opacity: 0.45 }}>
+                Acceso inmediato · Contenido nuevo cada semana
+              </p>
+            </motion.div>
+
+            {/* Right: foto09 */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, delay: 0.15 }}
+              className="relative aspect-[3/4] rounded-sm overflow-hidden"
+              style={{ border: '1px solid var(--model-border)', boxShadow: '0 0 60px var(--model-glow)' }}
+            >
+              <Image
+                src={`${BASE}/photos/foto09.jpg`}
+                alt={MODEL.name}
+                fill
+                className="object-cover object-top"
+              />
+              <div className="absolute inset-0" style={{
+                background: 'linear-gradient(to left, transparent 55%, var(--model-bg) 100%)'
+              }} />
+              <div className="absolute inset-0" style={{
+                background: 'linear-gradient(to top, var(--model-bg) 0%, transparent 25%)'
+              }} />
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* ══════════════ FOOTER ══════════════ */}
-      <footer
-        className="py-12 px-6 md:px-12"
-        style={{ borderTop: '1px solid var(--model-border)', background: 'var(--model-bg2)' }}
-      >
+      <footer className="py-12 px-6 md:px-12" style={{ borderTop: '1px solid var(--model-border)', background: 'var(--model-bg2)' }}>
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex flex-col sm:flex-row items-center gap-8">
             <div className="relative h-10 w-36">
