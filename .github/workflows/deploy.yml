@@ -30,8 +30,9 @@ jobs:
 
       - name: Build
         run: npm run build
-        env:
-          NEXT_PUBLIC_BASE_PATH: /amber-prada
+
+      - name: Add CNAME
+        run: echo "thesecretsroom.com" > out/CNAME
 
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -46,3 +47,4 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
