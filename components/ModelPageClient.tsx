@@ -34,7 +34,7 @@ const MODEL = {
 };
 
 export default function ModelPageClient() {
-  const [palette, setPalette] = useState<Palette>('dusk');
+  const [palette, setPalette] = useState<Palette>('gothic');
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
@@ -120,8 +120,8 @@ export default function ModelPageClient() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.1, duration: 0.8 }}
-              className="font-heading italic text-xl md:text-2xl mb-8"
-              style={{ color: 'var(--model-muted)', fontWeight: 300 }}
+              className="font-heading italic text-base md:text-lg mb-8 text-left"
+              style={{ color: 'var(--model-text)', fontWeight: 400, opacity: 0.85, textShadow: '0 1px 12px rgba(0,0,0,0.95)' }}
             >
               {MODEL.tagline}
             </motion.p>
@@ -129,16 +129,46 @@ export default function ModelPageClient() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.3 }}
-              className="flex justify-end"
+              className="flex flex-col items-end gap-0"
             >
               <a
                 href={MODEL.platformUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-model inline-block px-10 py-4 text-sm tracking-[0.25em] font-body font-semibold rounded-sm heartbeat"
+                className="btn-model inline-block px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-sm tracking-[0.2em] font-body font-semibold rounded-sm heartbeat w-full text-center"
               >
                 <span>ENTRAR AL CONTENIDO EXCLUSIVO</span>
               </a>
+
+              {/* Separador */}
+              <div className="flex items-center gap-3 my-5 w-full">
+                <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, transparent, var(--model-border))' }} />
+                <span className="font-body text-[11px]" style={{ color: 'var(--model-muted)', opacity: 0.5 }}>✦</span>
+                <div className="flex-1 h-px" style={{ background: 'linear-gradient(to left, transparent, var(--model-border))' }} />
+              </div>
+
+              <p className="font-heading italic text-base md:text-lg mb-4 leading-relaxed w-full text-left" style={{ color: 'var(--model-text)', fontWeight: 400, opacity: 0.85, textShadow: '0 1px 12px rgba(0,0,0,0.95)' }}>
+                Si todavía no has visto...
+              </p>
+              <motion.a
+                href={MODEL.platformUrl2}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-model w-full px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-sm tracking-[0.2em] font-body font-bold rounded-sm text-center block"
+                animate="idle"
+                whileHover="hover"
+                whileTap="tap"
+                variants={{
+                  idle: {
+                    x: [0, -3, 3, -3, 3, -2, 2, -1, 1, 0],
+                    transition: { duration: 0.7, repeat: Infinity, ease: 'easeInOut', repeatDelay: 2.5 },
+                  },
+                  hover: { x: 0, scale: 1.06 },
+                  tap: { scale: 0.97 },
+                }}
+              >
+                <span>VEN Y CONOCE UNA MUESTRA GRATIS DE NUESTRO CONTENIDO →</span>
+              </motion.a>
             </motion.div>
           </div>
         </motion.div>
@@ -291,32 +321,57 @@ export default function ModelPageClient() {
                 {MODEL.stats[0].value} personas ya tienen acceso a lo que tú todavía no has visto.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 mb-4">
-                <motion.a
-                  href={MODEL.platformUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-model px-8 py-4 text-sm tracking-[0.2em] font-body font-bold rounded-sm text-center"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <span>CLIPS4SALE →</span>
-                </motion.a>
-                <motion.a
-                  href={MODEL.platformUrl2}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-4 text-sm tracking-[0.2em] font-body font-semibold rounded-sm text-center border transition-all duration-300"
-                  style={{ borderColor: 'var(--model-border)', color: 'var(--model-muted)' }}
-                  whileHover={{ scale: 1.04, borderColor: 'var(--model-accent2)', color: 'var(--model-text)' }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  XVIDEOS →
-                </motion.a>
+              {/* Primary CTA — Clips4Sale con latido */}
+              <motion.a
+                href={MODEL.platformUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-model w-full px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-sm tracking-[0.2em] font-body font-bold rounded-sm text-center block"
+                animate="idle"
+                whileHover="hover"
+                whileTap="tap"
+                variants={{
+                  idle: {
+                    scale: [1, 1.04, 0.98, 1.04, 1],
+                    transition: { duration: 2.5, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.8 },
+                  },
+                  hover: { scale: 1.06 },
+                  tap: { scale: 0.97 },
+                }}
+              >
+                <span>ENTRAR AL CONTENIDO EXCLUSIVO →</span>
+              </motion.a>
+
+              {/* Separador */}
+              <div className="flex items-center gap-3 my-7">
+                <div className="flex-1 h-px" style={{ background: 'linear-gradient(to right, transparent, var(--model-border))' }} />
+                <span className="font-body text-[11px]" style={{ color: 'var(--model-muted)', opacity: 0.5 }}>✦</span>
+                <div className="flex-1 h-px" style={{ background: 'linear-gradient(to left, transparent, var(--model-border))' }} />
               </div>
-              <p className="font-body text-[10px] tracking-wider" style={{ color: 'var(--model-muted)', opacity: 0.45 }}>
-                Acceso inmediato · Contenido nuevo cada semana
+
+              {/* Secondary CTA — XVideos con vibración */}
+              <p className="font-heading italic text-base md:text-lg mb-4 leading-relaxed" style={{ color: 'var(--model-text)', fontWeight: 400, opacity: 0.85 }}>
+                Si todavía no has visto...
               </p>
+              <motion.a
+                href={MODEL.platformUrl2}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-model w-full px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-sm tracking-[0.2em] font-body font-bold rounded-sm text-center block"
+                animate="idle"
+                whileHover="hover"
+                whileTap="tap"
+                variants={{
+                  idle: {
+                    x: [0, -3, 3, -3, 3, -2, 2, -1, 1, 0],
+                    transition: { duration: 0.7, repeat: Infinity, ease: 'easeInOut', repeatDelay: 2.5 },
+                  },
+                  hover: { x: 0, scale: 1.06 },
+                  tap: { scale: 0.97 },
+                }}
+              >
+                <span>VEN Y CONOCE UNA MUESTRA GRATIS DE NUESTRO CONTENIDO →</span>
+              </motion.a>
             </motion.div>
 
             {/* Right: foto09 */}
