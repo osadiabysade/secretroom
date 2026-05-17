@@ -13,9 +13,12 @@ const MODEL = {
   alias: 'Amber',
   tagline: 'Lo que ves es solo el principio.',
   bio: 'Hay partes de mí que las palabras no alcanzan a describir. Mi contenido no es para todos — es para los que saben apreciar lo que va más allá de lo evidente.',
-  platformUrl: 'https://www.sheer.com/amber',
+  platformUrl: 'https://www.clips4sale.com/es/studio/459727/the-secret-room',
   platformUrl2: 'https://www.xvideos.com/channels/amber6096',
   photos: Array.from({ length: 9 }, (_, i) => `${BASE}/photos/foto0${i + 1}.jpg`),
+  carousel1Photos: ['Modelo11','Modelo12','Modelo13','Modelo14','Modelo16','Modelo17'].map(n => `${BASE}/photos/${n}.jpg`),
+  carousel2Photos: ['Modelo18','Modelo19','Modelo20','Modelo21','Modelo22'].map(n => `${BASE}/photos/${n}.jpg`),
+  carousel3Photos: ['Modelo23','Modelo24','Modelo25','Modelo26','Modelo27'].map(n => `${BASE}/photos/${n}.jpg`),
   heroVideo: `${BASE}/video/presentacion_AmberPrada.mp4`,
   stats: [
     { label: 'Suscriptores', value: '1.2K+' },
@@ -32,7 +35,6 @@ const MODEL = {
 
 export default function ModelPageClient() {
   const [palette, setPalette] = useState<Palette>('dusk');
-  const [bioOpen, setBioOpen] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
@@ -62,82 +64,7 @@ export default function ModelPageClient() {
         ))}
       </div>
 
-      {/* ── Bio floating button ── */}
-      <button
-        onClick={() => setBioOpen(true)}
-        className="fixed bottom-8 right-5 z-50 w-11 h-11 rounded-full flex items-center justify-center font-body text-xs tracking-wider border transition-all duration-300"
-        style={{
-          background: 'var(--model-bg2)',
-          borderColor: 'var(--model-border)',
-          color: 'var(--model-muted)',
-          boxShadow: '0 0 20px var(--model-glow)',
-          backdropFilter: 'blur(8px)',
-        }}
-      >
-        ?
-      </button>
 
-      {/* ── Bio side card ── */}
-      <AnimatePresence>
-        {bioOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50"
-              style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)' }}
-              onClick={() => setBioOpen(false)}
-            />
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed top-0 right-0 h-full z-50 w-80 max-w-[90vw] flex flex-col overflow-y-auto"
-              style={{ background: 'var(--model-bg2)', borderLeft: '1px solid var(--model-border)' }}
-            >
-              <div className="p-6 pt-8 flex-1">
-                <button
-                  onClick={() => setBioOpen(false)}
-                  className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center font-body text-lg"
-                  style={{ color: 'var(--model-muted)' }}
-                >
-                  ×
-                </button>
-                <div className="relative w-full aspect-[3/4] rounded-sm overflow-hidden mb-5"
-                  style={{ border: '1px solid var(--model-border)' }}>
-                  <Image src={MODEL.photos[1]} alt={MODEL.name} fill className="object-cover object-top" />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--model-bg2) 0%, transparent 40%)' }} />
-                </div>
-                <p className="font-body text-[9px] tracking-[0.4em] uppercase mb-2" style={{ color: 'var(--model-accent)' }}>
-                  ✦ &nbsp; Sobre mí
-                </p>
-                <h3 className="font-display text-2xl mb-4" style={{ color: 'var(--model-text)' }}>{MODEL.alias}</h3>
-                <p className="font-heading italic text-base leading-relaxed mb-6" style={{ color: 'var(--model-muted)', fontWeight: 300 }}>
-                  {MODEL.bio}
-                </p>
-                <div className="section-divider mb-6" />
-                <p className="font-body text-xs leading-relaxed mb-6" style={{ color: 'var(--model-muted)', fontWeight: 300 }}>
-                  Mi contenido es íntimo, auténtico y hecho con intención. No encontrarás nada igual en ningún otro lugar.
-                </p>
-                <div className="grid grid-cols-3 gap-3 mb-6">
-                  {MODEL.stats.map((s, i) => (
-                    <div key={i} className="text-center p-3 rounded-sm" style={{ background: 'var(--model-bg)', border: '1px solid var(--model-border)' }}>
-                      <p className="font-display text-base" style={{ color: 'var(--model-accent2)' }}>{s.value}</p>
-                      <p className="font-body text-[8px] tracking-wider uppercase mt-1" style={{ color: 'var(--model-muted)' }}>{s.label}</p>
-                    </div>
-                  ))}
-                </div>
-                <a href={MODEL.platformUrl} target="_blank" rel="noopener noreferrer"
-                  className="btn-model block w-full text-center px-6 py-3 text-[11px] tracking-[0.2em] font-body font-semibold rounded-sm">
-                  <span>VER MI CONTENIDO</span>
-                </a>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
 
       {/* ══════════════ HERO ══════════════ */}
       <section ref={heroRef} className="relative h-screen min-h-[600px] overflow-hidden flex items-end justify-end">
@@ -232,7 +159,7 @@ export default function ModelPageClient() {
       {/* ══════════════ SCRATCH REVEAL ══════════════ */}
       <section className="relative py-20 px-6 md:px-12 overflow-hidden" style={{ background: 'var(--model-bg)' }}>
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, var(--model-soft) 0%, transparent 70%)' }} />
-        <div className="max-w-2xl mx-auto relative z-10">
+        <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
             className="text-center mb-10"
             initial={{ opacity: 0, y: 20 }}
@@ -249,17 +176,23 @@ export default function ModelPageClient() {
               Toca o desliza para descubrir. Lo que reveles, es tuyo.
             </p>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <ScratchRevealCarousel
-              photos={MODEL.photos}
-              modelName={MODEL.name}
-              platformUrl={MODEL.platformUrl}
-            />
-          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+            {[MODEL.carousel1Photos, MODEL.carousel2Photos, MODEL.carousel3Photos].map((photos, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.12 }}
+              >
+                <ScratchRevealCarousel
+                  photos={photos}
+                  modelName={MODEL.name}
+                  platformUrl={MODEL.platformUrl}
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -367,7 +300,7 @@ export default function ModelPageClient() {
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  <span>SHEER.COM →</span>
+                  <span>CLIPS4SALE →</span>
                 </motion.a>
                 <motion.a
                   href={MODEL.platformUrl2}
@@ -396,7 +329,7 @@ export default function ModelPageClient() {
               style={{ border: '1px solid var(--model-border)', boxShadow: '0 0 60px var(--model-glow)' }}
             >
               <Image
-                src={`${BASE}/photos/foto09.jpg`}
+                src={`${BASE}/photos/Model_footer.jpg`}
                 alt={MODEL.name}
                 fill
                 className="object-cover object-top"
@@ -418,19 +351,19 @@ export default function ModelPageClient() {
           <div className="flex flex-col sm:flex-row items-center gap-8">
             <div className="relative h-10 w-36">
               <Image
-                src={`${BASE}/logos/osadia.jpg`}
+                src={`${BASE}/logos/firma_osadia.jpeg`}
                 alt="Osadía by Sade"
                 fill
-                className="object-contain filter brightness-0 invert opacity-60 hover:opacity-90 transition-opacity duration-300"
+                className="object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
               />
             </div>
             <div className="w-px h-7 hidden sm:block" style={{ background: 'var(--model-border)' }} />
             <div className="relative h-10 w-24">
               <Image
-                src={`${BASE}/logos/rawstone.jpg`}
+                src={`${BASE}/logos/firma_rawstone.jpeg`}
                 alt="Raw Stone Producciones"
                 fill
-                className="object-contain filter brightness-0 invert opacity-60 hover:opacity-90 transition-opacity duration-300"
+                className="object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
               />
             </div>
           </div>
