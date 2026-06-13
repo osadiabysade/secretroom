@@ -6,6 +6,9 @@ import ScratchRevealCarousel from './ScratchRevealCarousel';
 
 type Palette = 'gothic' | 'dusk';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const trackCTA = (button: string, location: string) => (window as any).gtag?.('event', 'cta_click', { button, location });
+
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 const MODEL = {
@@ -135,6 +138,7 @@ export default function ModelPageClient() {
                 href={MODEL.platformUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCTA('clips4sale', 'hero')}
                 className="btn-model inline-block px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-sm tracking-[0.2em] font-body font-semibold rounded-sm heartbeat w-full text-center"
               >
                 <span>ENTRAR AL CONTENIDO EXCLUSIVO</span>
@@ -154,6 +158,7 @@ export default function ModelPageClient() {
                 href={MODEL.platformUrl2}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCTA('xvideos', 'hero')}
                 className="btn-model w-full px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-sm tracking-[0.2em] font-body font-bold rounded-sm text-center block"
                 animate="idle"
                 whileHover="hover"
@@ -326,6 +331,7 @@ export default function ModelPageClient() {
                 href={MODEL.platformUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCTA('clips4sale', 'final_cta')}
                 className="btn-model w-full px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-sm tracking-[0.2em] font-body font-bold rounded-sm text-center block"
                 animate="idle"
                 whileHover="hover"
@@ -357,6 +363,7 @@ export default function ModelPageClient() {
                 href={MODEL.platformUrl2}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCTA('xvideos', 'final_cta')}
                 className="btn-model w-full px-5 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-sm tracking-[0.2em] font-body font-bold rounded-sm text-center block"
                 animate="idle"
                 whileHover="hover"

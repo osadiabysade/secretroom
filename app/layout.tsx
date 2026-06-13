@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cinzel_Decorative, Cormorant_Garamond, Raleway } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const cinzel = Cinzel_Decorative({
@@ -44,7 +45,16 @@ export default function RootLayout({
       lang="es"
       className={`${cinzel.variable} ${cormorant.variable} ${raleway.variable}`}
     >
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-BCFHF5DQNC" strategy="afterInteractive" />
+        <Script id="ga4-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-BCFHF5DQNC');
+        `}</Script>
+      </body>
     </html>
   );
 }
